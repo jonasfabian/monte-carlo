@@ -1,9 +1,9 @@
-<div>
-  <canvas #canvas width="500px" height="500px" style="margin: 15px; border: 1px solid black;"></canvas>
+<div class="set-margin">
+  <canvas id="canvas" #canvas></canvas>
 </div>
-<div>
-  <button style="margin: 15px;" (click)="start()">Start</button>
+<div class="set-margin">
+  <button (click)="start()">Calculate π</button>
 </div>
-<div style="margin: 15px;">
+<div class="set-margin">
   π ≃ {{pi}}
 </div>
