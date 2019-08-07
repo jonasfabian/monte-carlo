@@ -63,6 +63,6 @@ export class OverviewComponent implements OnInit {
       this.ctx.fillStyle = 'blue';
       this.inSquare++;
     }
-    this.ctx.fillRect(x, y, 5, 5);
+    this.ctx.fillRect(x, y, 1, 1);
   }
 }
