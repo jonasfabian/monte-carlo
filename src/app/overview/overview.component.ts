@@ -24,25 +24,21 @@ export class OverviewComponent implements OnInit {
   }
 
   start(): void {
-    setInterval(() => {
-      // generate 2 random numbers between 0 and 100
-      if (this.index <= 10000) {
-        this.checkInCircle(Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
-        this.index++;
-      }
-    }, 1);
-    this.calculatePi();
-    console.log('Outside Circle: ' + this.inSquare);
-    console.log('Inside Circle: ' + this.inCircle);
+    // generate 2 random numbers between 0 and 100
+    while (this.index <= 100000) {
+      this.checkInCircle(Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
+      this.calculatePi();
+      this.index++;
+    }
   }
 
   // x² + y² <= r²
   checkInCircle(x: number, y: number): void {
     if ((Math.pow(x, 2) + Math.pow(y, 2)) <= Math.pow(this.radius, 2)) {
-      this.inSquare++;
+      this.inCircle++;
       this.drawPoint(x, y, false);
     } else {
-      this.inCircle++;
+      this.inSquare++;
       this.drawPoint(x, y, true);
     }
   }
