@@ -11,6 +11,7 @@ export class OverviewComponent implements OnInit {
   }
 
   @ViewChild('canvas', {static: true}) canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('iterationInput', {static: true}) iterationInput: ElementRef;
   ctx: CanvasRenderingContext2D;
   radius = 500;
   inSquare = 0;
@@ -31,7 +32,7 @@ export class OverviewComponent implements OnInit {
   start(): void {
     let index = 0;
     this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
-    while (index <= 100000) {
+    while (index <= this.iterationInput.nativeElement.value) {
       this.checkInCircle(Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
       this.calculatePi();
       index++;

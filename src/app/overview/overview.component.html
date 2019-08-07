@@ -2,7 +2,9 @@
   <canvas id="canvas" #canvas></canvas>
 </div>
 <div class="set-margin">
-  <button (click)="start()">Calculate π</button>
+  <label for="iterationInput">Amount of iterations</label>
+  <input style="margin-left: 5px;" id="iterationInput" #iterationInput type="number">
+  <button style="margin-left: 5px;" (click)="start()">Calculate π</button>
 </div>
 <div class="set-margin">
   π ≃ {{pi}}
