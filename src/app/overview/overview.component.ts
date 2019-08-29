@@ -13,56 +13,37 @@ export class OverviewComponent implements OnInit {
   @ViewChild('canvas', {static: true}) canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('iterationInput', {static: true}) iterationInput: ElementRef;
   ctx: CanvasRenderingContext2D;
-  radius = 500;
+  width = 400;
+  height = 400;
+  radius = 200;
+
+  index = 0;
   inSquare = 0;
   inCircle = 0;
+
   pi = this.inCircle / this.inSquare;
 
   ngOnInit() {
-    this.initCanvas();
-  }
-
-  initCanvas(): void {
-    // Initialized Canvas
-    this.canvas.nativeElement.width = 500;
-    this.canvas.nativeElement.height = 500;
     this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.canvas.nativeElement.width = this.width;
+    this.canvas.nativeElement.height = this.height;
   }
 
   start(): void {
-    let index = 0;
-    this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
-    while (index <= this.iterationInput.nativeElement.value) {
-      this.checkInCircle(Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
-      this.calculatePi();
-      index++;
-    }
-  }
-
-  // x² + y² <= r²
-  checkInCircle(x: number, y: number): void {
-    const xSqrt = Math.pow(x, 2);
-    const ySqrt = Math.pow(y, 2);
-    const rSqrt = Math.pow(this.radius, 2);
-    if ((xSqrt + ySqrt) <= rSqrt) {
-      this.drawPoint(x, y, true);
-    } else {
-      this.drawPoint(x, y, false);
-    }
-  }
-
-  calculatePi(): void {
-    this.pi = 4 * (this.inCircle / (this.inSquare + this.inCircle));
-  }
-
-  drawPoint(x: number, y: number, inside: boolean): void {
-    if (inside) {
-      this.ctx.fillStyle = 'red';
-      this.inCircle++;
-    } else {
-      this.ctx.fillStyle = 'blue';
-      this.inSquare++;
-    }
-    this.ctx.fillRect(x, y, 1, 1);
+    setInterval(() => {
+      if (this.index <= 1000000) {
+        const x = Math.random() * this.width;
+        const y = Math.random() * this.height;
+        this.inSquare++;
+        this.ctx.fillStyle = 'blue';
+        if (Math.sqrt(Math.pow(this.radius - x, 2) + Math.pow(this.radius - y, 2)) <= this.radius) {
+          this.inCircle++;
+          this.ctx.fillStyle = 'red';
+        }
+        this.ctx.fillRect(x, y, 5, 5);
+        this.index++;
+        this.pi = 4 * (this.inCircle / this.inSquare);
+      }
+    }, 1);
   }
 }
