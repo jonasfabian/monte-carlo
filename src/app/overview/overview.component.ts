@@ -10,18 +10,17 @@ export class OverviewComponent implements OnInit {
   constructor() {
   }
 
-  @ViewChild('canvas', {static: true}) canvas: ElementRef<HTMLCanvasElement>;
-  @ViewChild('iterationInput', {static: true}) iterationInput: ElementRef;
   ctx: CanvasRenderingContext2D;
   width = 400;
   height = 400;
   radius = 200;
-
   index = 0;
   inSquare = 0;
   inCircle = 0;
-
   pi = this.inCircle / this.inSquare;
+
+  @ViewChild('canvas', {static: true}) canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('iterationInput', {static: true}) iterationInput: ElementRef;
 
   ngOnInit() {
     this.ctx = this.canvas.nativeElement.getContext('2d');
